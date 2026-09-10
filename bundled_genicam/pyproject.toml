@@ -1,0 +1,4 @@
+[dependency-groups]
+dev = [
+    "nanobind>=3.0.1",
+]

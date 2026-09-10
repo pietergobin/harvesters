@@ -1,0 +1,17 @@
+version = 1
+revision = 3
+requires-python = ">=3.12"
+
+[manifest]
+
+[manifest.dependency-groups]
+dev = [{ name = "nanobind", specifier = ">=3.0.1" }]
+
+[[package]]
+name = "nanobind"
+version = "3.0.1"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/nanobind/3.0.1/nanobind-3.0.1.tar.gz", hash = "sha256:f7f0a889c8fb80deaacb95e918d88e05148850a32d2b8eda28446291b2bf7c35" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/nanobind/3.0.1/nanobind-3.0.1-py3-none-any.whl", hash = "sha256:4b49491fe8bf483a5e0342125b8fe56237e490ba642c7e296170b8cd256a7764" },
+]

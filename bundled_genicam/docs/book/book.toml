@@ -1,0 +1,15 @@
+[book]
+title = "gentl — Python bindings for GenTL Producers"
+description = "User guide for the nanobind-based Python wrapper around the GenICam GenTL 1.6 C interface"
+authors = ["Harvesters contributors"]
+language = "en"
+src = "src"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "navy"
+git-repository-url = "https://github.com/genicam/harvesters"
+edit-url-template = "https://github.com/genicam/harvesters/edit/main/bundled_genicam/docs/book/{path}"
+
+[output.html.search]
+enable = true
