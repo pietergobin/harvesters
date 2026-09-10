@@ -17,12 +17,25 @@ testpaths = ["tests"]
 addopts = "--forked --timeout=90"
 
 [build-system]
-requires = ["setuptools>=42", "scikit-build>=0.13", "cmake>=3.18", "ninja"]
-build-backend = "setuptools.build_meta"
+requires = ["scikit-build-core>=0.10", "nanobind>=3.0.1"]
+build-backend = "scikit_build_core.build"
 
+[project]
+name = "gentl"
+version = "0.1.0"
+description = "Python bindings for the GenICam GenTL 1.6 API"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = []
 
-# [tool.scikit-build]
-# cmake.args = ["-DCMAKE_BUILD_TYPE=Release"]
-# cmake.verbose = true
-#
-# build-dir = "build/{wheel_tag}"
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+wheel.packages = []
+
+[tool.scikit-build.cmake]
+version = ">=3.15"
+build-type = "Release"
+
+[tool.scikit-build.sdist]
+include = ["CMakeLists.txt", "src/**", "README.md"]
