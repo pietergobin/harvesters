@@ -1,10 +1,10 @@
 [dependency-groups]
 dev = [
-    "genicam>=1.6.0",
-    "nanobind>=3.0.1",
-    "pytest>=9.1.1",
-    "pytest-forked>=1.7.5",
-    "pytest-timeout>=2.5.0",
+  "genicam>=1.6.0",
+  "nanobind>=3.0.1",
+  "pytest>=9.1.1",
+  "pytest-forked>=1.7.5",
+  "pytest-timeout>=2.5.0",
 ]
 
 [tool.pytest.ini_options]
@@ -15,3 +15,14 @@ testpaths = ["tests"]
 # session. `--timeout` guards against a test hanging forever on a stuck
 # EventGetData()/DSStartAcquisition() call.
 addopts = "--forked --timeout=90"
+
+[build-system]
+requires = ["setuptools>=42", "scikit-build>=0.13", "cmake>=3.18", "ninja"]
+build-backend = "setuptools.build_meta"
+
+
+# [tool.scikit-build]
+# cmake.args = ["-DCMAKE_BUILD_TYPE=Release"]
+# cmake.verbose = true
+#
+# build-dir = "build/{wheel_tag}"

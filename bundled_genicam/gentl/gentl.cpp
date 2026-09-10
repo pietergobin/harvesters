@@ -629,13 +629,25 @@ private:
 
 class PyDataStream {
 public:
+    // Normal constructor: this object *owns* the DS_HANDLE (obtained via
+    // DevOpenDataStream()) and will DSClose() it on close()/destruction.
     PyDataStream(FunctionTablePtr ft, DEV_HANDLE dev, DS_HANDLE handle)
         : ft_(std::move(ft)), dev_(dev), handle_(handle) {}
+
+    // "Borrowed handle" constructor: used to attach to a DS_HANDLE that was
+    // opened -- and is owned -- by a *different* GenTL binding already
+    // running in this process (see module-level attach_data_stream()).
+    // close()/destruction here only forgets the handle, it never calls
+    // DSClose() on it -- that remains the owning binding's responsibility.
+    PyDataStream(FunctionTablePtr ft, DS_HANDLE handle, bool /*borrowed_tag*/)
+        : ft_(std::move(ft)), dev_(GENTL_INVALID_HANDLE), handle_(handle),
+          owns_handle_(false) {}
 
     ~PyDataStream() { close_impl(); }
 
     PyDataStream(const PyDataStream &) = delete;
     PyDataStream &operator=(const PyDataStream &) = delete;
+
 
     void close() { close_impl(); }
 
@@ -718,16 +730,42 @@ public:
 
 private:
     void close_impl() {
-        if (handle_ && ft_ && ft_->DSClose_) {
+        if (owns_handle_ && handle_ && ft_ && ft_->DSClose_) {
             ft_->DSClose_(handle_);
-            handle_ = GENTL_INVALID_HANDLE;
         }
+        handle_ = GENTL_INVALID_HANDLE;
     }
 
     FunctionTablePtr ft_;
     DEV_HANDLE dev_;
     DS_HANDLE handle_;
+    bool owns_handle_ = true;
 };
+
+// Attaches to a DS_HANDLE that a *different* GenTL binding in this same
+// process already opened (e.g. genicam.gentl's official SWIG binding),
+// purely so its buffers can be managed with Producer-controlled allocation
+// (DSAllocAndAnnounceBuffer), which that other binding may not expose.
+//
+// This does not call DevOpenDataStream()/TLOpen()/GCInitLib() at all -- it
+// only dlopen()'s `cti_path` (harmlessly bumping the refcount of the
+// already-loaded shared library and resolving the handful of DS*/GC*
+// function pointers this module needs) and wraps the caller-supplied raw
+// handle. The caller remains responsible for the DataStream's lifetime
+// (opening/closing it, starting/stopping acquisition, registering for
+// events, etc.) through whichever binding actually owns it; this object
+// must not outlive that ownership.
+//
+// `handle` must be the exact numeric DS_HANDLE (pointer value) of an
+// already-open GenTL Data Stream module in this process, e.g. obtained from
+// genicam.gentl via `int(data_stream.module._handle)`.
+std::shared_ptr<PyDataStream> attach_data_stream(const std::string &cti_path,
+                                                  uintptr_t handle) {
+    auto ft = std::make_shared<FunctionTable>(cti_path);
+    return std::make_shared<PyDataStream>(
+        ft, reinterpret_cast<DS_HANDLE>(handle), true);
+}
+
 
 // ---------------------------------------------------------------------------
 // Device -- wraps a DEV_HANDLE
@@ -1524,4 +1562,14 @@ NB_MODULE(gentl, m) {
             nb::rv_policy::reference_internal)
         .def("__exit__", &PyProducer::exit, "exc_type"_a.none(),
              "exc_value"_a.none(), "traceback"_a.none());
+
+    m.def(
+        "attach_data_stream", &attach_data_stream, "cti_path"_a, "handle"_a,
+        "Attach to a DS_HANDLE already opened by a different GenTL binding "
+        "in this process (e.g. genicam.gentl), so its buffers can be "
+        "managed with Producer-controlled allocation "
+        "(DataStream.alloc_and_announce_buffer). Does not take ownership: "
+        "the returned DataStream's close() is a no-op with respect to the "
+        "underlying handle -- whoever originally opened it remains "
+        "responsible for closing it.");
 }
