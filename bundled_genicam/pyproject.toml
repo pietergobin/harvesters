@@ -1,4 +1,17 @@
 [dependency-groups]
 dev = [
+    "genicam>=1.6.0",
     "nanobind>=3.0.1",
+    "pytest>=9.1.1",
+    "pytest-forked>=1.7.5",
+    "pytest-timeout>=2.5.0",
 ]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Every test runs in its own forked subprocess: a real GenTL Producer keeps
+# process-global state (see tests/conftest.py's module docstring), and a
+# native crash anywhere in the wrapper must not take down the whole test
+# session. `--timeout` guards against a test hanging forever on a stuck
+# EventGetData()/DSStartAcquisition() call.
+addopts = "--forked --timeout=90"

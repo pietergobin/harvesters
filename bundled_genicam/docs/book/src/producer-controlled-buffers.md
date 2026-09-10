@@ -231,7 +231,11 @@ A few details in the example above are load-bearing, not stylistic:
 
 If you need buffers backed by memory *you* control (e.g. a `numpy` array, a
 pinned/page-locked allocation for a GPU pipeline, or memory shared with
-another process), use `announce_buffer()` instead:
+another process), use `announce_buffer()` instead. It accepts any object
+implementing Python's **writable** buffer protocol (`bytearray`,
+`numpy.ndarray`, `array.array`, ...) — immutable `bytes` are rejected
+(with a `BufferError`) since the acquisition engine writes into this memory
+and CPython `bytes` objects must never be mutated after creation:
 
 ```python
 payload_size = stream.get_info(gentl.STREAM_INFO_CMD.STREAM_INFO_PAYLOAD_SIZE)
@@ -239,10 +243,18 @@ payload_size = stream.get_info(gentl.STREAM_INFO_CMD.STREAM_INFO_PAYLOAD_SIZE)
 buffers = []
 for _ in range(4):
     memory = bytearray(payload_size)          # you own this memory
-    buf = stream.announce_buffer(bytes(memory))
+    buf = stream.announce_buffer(memory)
     buf.queue()
     buffers.append((buf, memory))
 ```
+
+The `gentl.Buffer` returned by `announce_buffer()` holds a reference to
+`memory` (and keeps its buffer-protocol view locked) internally until you
+call `buf.revoke()`, so it is safe to let your own local variable go out of
+scope — but you must still keep the buffer *contents* valid/meaningful for
+as long as the Producer might write into it, i.e. don't hand the same
+`bytearray` to two different buffers, and don't resize a `bytearray` that
+backs an announced buffer.
 
 Do not mix `announce_buffer()` and `alloc_and_announce_buffer()` on the same
 `DataStream` (GenTL spec §5.2.2) — pick one strategy per stream.

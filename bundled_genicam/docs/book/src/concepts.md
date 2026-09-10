@@ -77,7 +77,8 @@ details, including how to inspect the numeric `GC_ERROR` code.
 `DataStream` supports both of GenTL's buffer announcement strategies
 (GenTL spec, chapter 3.6):
 
-- **Consumer-allocated** — you provide the memory (as Python `bytes`) via
+- **Consumer-allocated** — you provide the memory (as any writable
+  buffer-protocol object, e.g. `bytearray`) via
   `DataStream.announce_buffer(data, private_ptr)`. You are responsible for
   keeping the underlying buffer alive and free'd.
 - **Producer-allocated ("Producer-controlled")** — the Producer allocates

@@ -1,3 +1,5 @@
 build/
 .venv/
 *.pyi
+docs/book/book/
+.pytest_cache/

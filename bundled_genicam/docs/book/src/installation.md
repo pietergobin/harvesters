@@ -66,3 +66,31 @@ on a Linux box with a MATRIX VISION mvIMPACT Acquire installation:
 ```python
 CTI_PATH = "/opt/ImpactAcquire/lib/x86_64/mvGenTLProducer.cti"
 ```
+
+## Don't have a camera handy? Use the Viky simulator
+
+You don't need real hardware to follow along with this guide or to try
+`gentl` for the first time. The official `genicam` PyPI package (already a
+dev dependency of this project, installed by `uv sync` above) ships
+**Viky**, a fully spec-conformant GenTL Producer simulator exposing three
+virtual color devices — no camera required:
+
+```python
+import os
+import genicam
+
+CTI_PATH = os.path.join(os.path.dirname(genicam.__file__), "viky.cti")
+```
+
+This is exactly what the project's own [test suite](#running-the-test-suite)
+uses, so it's a well-exercised, reliable target to experiment against.
+
+## Running the test suite
+
+```bash
+pytest
+```
+
+runs the full suite in `tests/` against the Viky simulator above — see the
+top-level `README.md` for details (env var overrides, crash-isolation via
+`pytest-forked`, etc.).
