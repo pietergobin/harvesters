@@ -5,7 +5,53 @@ requires-python = ">=3.12"
 [manifest]
 
 [manifest.dependency-groups]
-dev = [{ name = "nanobind", specifier = ">=3.0.1" }]
+dev = [
+    { name = "genicam", specifier = ">=1.6.0" },
+    { name = "nanobind", specifier = ">=3.0.1" },
+    { name = "pytest", specifier = ">=9.1.1" },
+    { name = "pytest-forked", specifier = ">=1.7.5" },
+    { name = "pytest-timeout", specifier = ">=2.5.0" },
+]
+
+[[package]]
+name = "colorama"
+version = "0.4.6"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/colorama/0.4.6/colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/colorama/0.4.6/colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6" },
+]
+
+[[package]]
+name = "genicam"
+version = "1.6.0"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp312-cp312-macosx_13_0_arm64.whl", hash = "sha256:d0becabb469d0f51f9d4820d655d2788c620a8ee1c8abcfa4703cac87ba27f53" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp312-cp312-manylinux2014_aarch64.whl", hash = "sha256:3a1a16b89fec69d52142781f280ce2c01a4c1422da1cd08893ed1cd630d11c30" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp312-cp312-manylinux2014_armv7l.whl", hash = "sha256:b65beca4b425442922a2f2beefae1e3109ce166cfd726fcd9d2ac59ff1d57e24" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp312-cp312-manylinux2014_x86_64.whl", hash = "sha256:83da90404da189a87273864f2c97c761c1807fc6fc532fabd3bf50c0ae28f8ae" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp312-cp312-win_amd64.whl", hash = "sha256:1d2bb3f39443c5bc248fcbde83a3a973370ca43588a7c1ded7d7324d7d9427d3" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp313-cp313-macosx_13_0_arm64.whl", hash = "sha256:f5c35275014f4793b34a21ebe8bbcb269a87b5d1bf129daf2818c6160f8758c9" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp313-cp313-manylinux2014_aarch64.whl", hash = "sha256:f4d6496660507b32a7f6ef05f5344bcd305ea3e2158a41bf53169663d7a72e70" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp313-cp313-manylinux2014_armv7l.whl", hash = "sha256:efe646df5e8ca76208c6621e8a5dbea3e9909641801787993ea2d7ec4a704c09" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp313-cp313-manylinux2014_x86_64.whl", hash = "sha256:a342980e80735b7b1e4f18f6c33d64eccc3e95887dd72f302409f1296bef3dac" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp313-cp313-win_amd64.whl", hash = "sha256:740156c5fa8d82330d36314112f4b755e8333c16f82792174f1a2a2e150519ae" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp314-cp314-macosx_13_0_arm64.whl", hash = "sha256:064a87188b6102bac03a8ab1ccff5280e8fa4cf6378448e6286ed6f4cc9f7a64" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp314-cp314-manylinux2014_aarch64.whl", hash = "sha256:3dcf4af1fabb1cee06cac0bed6560f0e49180dab1e078501949eaf07596736c3" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp314-cp314-manylinux2014_armv7l.whl", hash = "sha256:e3f9ff542bbd2fe389e1a94e4a694ec34f94ab378247c5f7e761b78ff5891d24" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp314-cp314-manylinux2014_x86_64.whl", hash = "sha256:d1e12e276eab6dbe8dec37e060ea5a8cc5758cc8c3502a048782e38a0451517d" },
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/genicam/1.6/genicam-1.6.0-cp314-cp314-win_amd64.whl", hash = "sha256:7630b7844b273080f21f01881c56667cc68521186b75dd15798f5dee1f8f1037" },
+]
+
+[[package]]
+name = "iniconfig"
+version = "2.3.0"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/iniconfig/2.3/iniconfig-2.3.0.tar.gz", hash = "sha256:c76315c77db068650d49c5b56314774a7804df16fee4402c1f19d6d15d8c4730" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/iniconfig/2.3/iniconfig-2.3.0-py3-none-any.whl", hash = "sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12" },
+]
 
 [[package]]
 name = "nanobind"
@@ -14,4 +60,71 @@ source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.Digi
 sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/nanobind/3.0.1/nanobind-3.0.1.tar.gz", hash = "sha256:f7f0a889c8fb80deaacb95e918d88e05148850a32d2b8eda28446291b2bf7c35" }
 wheels = [
     { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/nanobind/3.0.1/nanobind-3.0.1-py3-none-any.whl", hash = "sha256:4b49491fe8bf483a5e0342125b8fe56237e490ba642c7e296170b8cd256a7764" },
+]
+
+[[package]]
+name = "packaging"
+version = "26.3"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/packaging/26.3/packaging-26.3.tar.gz", hash = "sha256:94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/packaging/26.3/packaging-26.3-py3-none-any.whl", hash = "sha256:d7193f7c8e4e93f444fde0262bf90af30e16fa0ad0ad44cb553c87339b23cd1c" },
+]
+
+[[package]]
+name = "pluggy"
+version = "1.6.0"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pluggy/1.6/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pluggy/1.6/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746" },
+]
+
+[[package]]
+name = "pygments"
+version = "2.21.0"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pygments/2.21/pygments-2.21.0.tar.gz", hash = "sha256:610ca751c9bc2492b38eb9a38a7fbc93edbbb2d7182edaf34e66ae493dee5c8c" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pygments/2.21/pygments-2.21.0-py3-none-any.whl", hash = "sha256:2363c69b61c4a97c838da3b130dcd6468f4848992b21a82f2a63ec34377137d9" },
+]
+
+[[package]]
+name = "pytest"
+version = "9.1.1"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+dependencies = [
+    { name = "colorama", marker = "sys_platform == 'win32'" },
+    { name = "iniconfig" },
+    { name = "packaging" },
+    { name = "pluggy" },
+    { name = "pygments" },
+]
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pytest/9.1.1/pytest-9.1.1.tar.gz", hash = "sha256:1088fbde8f2b49d95a549a195707afa7a76a3ce9bcadc26b6d71f0ffda5fe313" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pytest/9.1.1/pytest-9.1.1-py3-none-any.whl", hash = "sha256:37a86b45efb9a47a61a36449063e8e18d0cab3161329fc099eb21783169c4f0c" },
+]
+
+[[package]]
+name = "pytest-forked"
+version = "1.7.5"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+dependencies = [
+    { name = "pytest" },
+]
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pytest-forked/1.7.5/pytest_forked-1.7.5.tar.gz", hash = "sha256:00f2bee51612f29b8e6b81eed2c3b2975e824c2693394f5bdaf7a1369078ba5f" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pytest-forked/1.7.5/pytest_forked-1.7.5-py3-none-any.whl", hash = "sha256:e9f3475fa0a42927f5e370d721de9c2d785616a06a4c506712d6cb8055e37c84" },
+]
+
+[[package]]
+name = "pytest-timeout"
+version = "2.5.0"
+source = { registry = "https://pkgs.dev.azure.com/mohawkind/Unilin.Flooring.DigitalOperations/_packaging/DigitalOperationsPython/pypi/simple/" }
+dependencies = [
+    { name = "pytest" },
+]
+sdist = { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pytest-timeout/2.5/pytest_timeout-2.5.0.tar.gz", hash = "sha256:68c9d82dfe95fa65712e107010c9344e7d8b4afe8c975a7be0d273d939583a93" }
+wheels = [
+    { url = "https://pkgs.dev.azure.com/mohawkind/77852ffc-bcc3-4498-a38c-32624ff84964/_packaging/d0349f33-6dc1-43e2-a8e4-0297a2c49270/pypi/download/pytest-timeout/2.5/pytest_timeout-2.5.0-py3-none-any.whl", hash = "sha256:030217c22532b6cb88917518f07afa7e3623476ab5afb5a8c0d0dccf6cd9b2de" },
 ]

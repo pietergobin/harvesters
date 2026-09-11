@@ -1,9 +1,12 @@
 # bundled_genicam
 
-Build and packaging home for `gentl`: a nanobind-based Python extension
-that exposes the GenICam GenTL 1.6 Producer C interface, loading any
-vendor's `.cti` shared library dynamically at runtime (see
-`src/gentl.cpp`).
+Build and packaging home for `gentl` and `gentl15`: nanobind-based Python
+extensions that expose the GenICam GenTL Producer C interface, loading any
+vendor's `.cti` shared library dynamically at runtime (see `src/gentl.cpp`
+and `src/gentl15.cpp`).
+
+- `gentl` targets **GenTL 1.6** (the current spec).
+- `gentl15` targets **GenTL 1.5** (as specified in GenICam Package v3.0.2).
 
 ## Building
 
@@ -14,8 +17,8 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build -j$(nproc)
 ```
 
-This produces `build/gentl*.so` (or `.pyd` on Windows) plus a fully typed
-`build/gentl.pyi` stub.
+This produces `build/gentl*.so` and `build/gentl15*.so` (or `.pyd` on
+Windows) plus fully typed `build/gentl.pyi` and `build/gentl15.pyi` stubs.
 
 ## Testing
 

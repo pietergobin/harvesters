@@ -20,8 +20,9 @@ execute_process(
   OUTPUT_STRIP_TRAILING_WHITESPACE OUTPUT_VARIABLE nanobind_ROOT)
 find_package(nanobind CONFIG REQUIRED)
 
-# NB_STATIC/LTO/STABLE_ABI keep the wheel small and interpreter-version
-# agnostic; STUB generates gentl.pyi for full static typing support.
+# ---------------------------------------------------------------------------
+# gentl -- GenTL 1.6 bindings
+# ---------------------------------------------------------------------------
 nanobind_add_module(
   gentl
   STABLE_ABI
@@ -33,12 +34,9 @@ nanobind_add_module(
 target_include_directories(gentl PRIVATE src/headers)
 
 if (NOT WIN32)
-  # GenTL Producers (.cti) are loaded at runtime via dlopen()/dlsym().
   target_link_libraries(gentl PRIVATE ${CMAKE_DL_LIBS})
 endif()
 
-# Generate a fully typed .pyi stub next to the compiled extension so that
-# IDEs/type-checkers see a complete, statically typed API surface.
 nanobind_add_stub(
   gentl_stub
   MODULE gentl
@@ -49,3 +47,31 @@ nanobind_add_stub(
 
 install(TARGETS gentl LIBRARY DESTINATION .)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gentl.pyi DESTINATION .)
+
+# ---------------------------------------------------------------------------
+# gentl15 -- GenTL 1.5 bindings (GenICam Package v3.0.2)
+# ---------------------------------------------------------------------------
+nanobind_add_module(
+  gentl15
+  STABLE_ABI
+  LTO
+  NB_STATIC
+  src/gentl15.cpp
+)
+
+target_include_directories(gentl15 PRIVATE src/headers)
+
+if (NOT WIN32)
+  target_link_libraries(gentl15 PRIVATE ${CMAKE_DL_LIBS})
+endif()
+
+nanobind_add_stub(
+  gentl15_stub
+  MODULE gentl15
+  OUTPUT gentl15.pyi
+  PYTHON_PATH $<TARGET_FILE_DIR:gentl15>
+  DEPENDS gentl15
+)
+
+install(TARGETS gentl15 LIBRARY DESTINATION .)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/gentl15.pyi DESTINATION .)

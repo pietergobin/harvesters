@@ -8,7 +8,7 @@ dev = [
 ]
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+testpaths = ["tests", "tests15"]
 # Every test runs in its own forked subprocess: a real GenTL Producer keeps
 # process-global state (see tests/conftest.py's module docstring), and a
 # native crash anywhere in the wrapper must not take down the whole test
@@ -23,7 +23,7 @@ build-backend = "scikit_build_core.build"
 [project]
 name = "gentl"
 version = "0.1.0"
-description = "Python bindings for the GenICam GenTL 1.6 API"
+description = "Python bindings for the GenICam GenTL 1.5 (v3.0.2) and 1.6 APIs"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }

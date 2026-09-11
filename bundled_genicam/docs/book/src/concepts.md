@@ -65,6 +65,52 @@ is_grabbing: bool = stream.get_info(gentl.STREAM_INFO_CMD.STREAM_INFO_IS_GRABBIN
 payload_size: int = stream.get_info(gentl.STREAM_INFO_CMD.STREAM_INFO_PAYLOAD_SIZE)
 ```
 
+## Checking which GenTL version a Producer supports
+
+Version negotiation in GenTL is **one-directional**: the *Consumer* queries
+the *Producer*; a Producer never asks the Consumer what it was built against.
+That is deliberate — Producers are required to be backward compatible, so
+"which GenTL version does this `.cti` implement?" is the only question that
+matters at runtime, and it is answered by the Producer's **System module**
+via `get_info` (GenTL spec, `TL_INFO_GENTL_VER_MAJOR`/`MINOR`, GenTL v1.5):
+
+```python
+with gentl.Producer(cti_path) as producer:
+    major = producer.get_info(gentl.TL_INFO_CMD.TL_INFO_GENTL_VER_MAJOR)
+    minor = producer.get_info(gentl.TL_INFO_CMD.TL_INFO_GENTL_VER_MINOR)
+    print(f"Producer complies with GenTL {major}.{minor}")
+    print("Producer release:", producer.get_info(gentl.TL_INFO_CMD.TL_INFO_VERSION))
+```
+
+For example, the Viky reference Producer reports:
+
+```
+Producer complies with GenTL 1.6
+Producer release: 4.0
+```
+
+### Don't confuse module constants with the Producer's version
+
+The module-level constants `GENTL_MAJOR_VERSION`, `GENTL_MINOR_VERSION` and
+`GENTL_SUBMINOR_VERSION` are **compile-time**: they record the version of the
+GenTL *header* the binding was built against (for `gentl` that is 1.6, for
+`gentl15` it is 1.5). They say nothing about any particular `.cti` you load.
+
+The Producer's version, on the other hand, is discovered at **runtime** and
+is independent of the binding. Because Producers must be backward
+compatible, a version mismatch in either direction is normal and harmless —
+a GenTL 1.6 Producer (like Viky) works fine through the `gentl15` module,
+which tells you it was built against GenTL 1.5 while the Producer reports
+1.6.
+
+### SFNC alternative
+
+The same information is also exposed as GenApi features on the System
+module: `GenTLVersionMajor`/`GenTLVersionMinor` (see the GenICam GenTL SFNC
+document, "System Information"). Reading those requires going through the
+System's GenApi port, so the `TL_INFO_*` query above is the simpler, direct
+route.
+
 ## Error handling
 
 Every GenTL C function returns a `GC_ERROR` code. The wrapper checks it for
